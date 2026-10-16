@@ -1,6 +1,6 @@
 # Essentia Health × AMN Healthcare — patient journey
 
-A responsive, presenter-led language-access microsite with seven patient journey stages, parallel spoken-language and ASL pathways, all 11 agenda topics, a conceptual architecture explorer, and a nine-step urgent-care scenario.
+A responsive, facilitator-led language-access presentation for a two-hour call. One active slide and one Previous/Next control pair guide the group through seven patient journey stages, all 11 agenda topics, a conceptual architecture, and a nine-step urgent-care scenario. Spoken-language and ASL pathways appear together, without toggles or branching.
 
 ## Run locally
 
@@ -10,25 +10,26 @@ The site has no external fonts, images, APIs, analytics, or CDN requests. Once s
 
 ## Present
 
-- Use the section navigation to scroll through the story.
-- Select journey stages to update both communication-access lanes together.
-- Select any agenda topic for workflow detail, ASL guidance, discovery questions, and expandable validation considerations. Links such as `#agenda-6` open specific topics.
-- Explore each architecture connection and step through the urgent-care scenario. The scenario’s ASL toggle keeps the current step for easy comparison.
-- Use **Present** for browser fullscreen (where supported); Escape exits. Use browser zoom to suit the display.
-- All selectors support Tab/Enter and arrow/Home/End navigation. Reduced-motion preferences are respected.
+- Follow the 30-slide sequence with **Previous / Next** or the left/right arrow keys. There is no autoplay; pause for discussion at the group’s pace.
+- Suggested pacing: introduction 10 minutes, patient journey 20, solutions and architecture 50, urgent-care scenario 20, reporting/implementation/next steps 20.
+- Both pathways stay visible at every journey and scenario step. Telehealth, translation, and follow-up retain explicit ASL guidance.
+- Each agenda slide uses three concise talking points. Optional **Facilitator notes · workflow detail & validation** disclosures retain the full workflows and implementation considerations without crowding the main discussion.
+- Direct links such as `#agenda-6`, `#journey-3`, and `#scenario-7` open a specific slide. Existing section links (`#journey`, `#agenda`, `#architecture`, `#scenario`, `#next-steps`) still work. Browser Back/Forward retraces visited slides.
+- Tab/Enter operates controls and notes. Slide changes focus the heading; arrow shortcuts do not intercept focused controls. Use browser fullscreen and zoom as needed. Mobile layouts stack the paired pathways; no animation is required.
 
 ## Edit content
 
 - `content.js`: agenda copy, journey stages, solution alignment, architecture nodes, and scenario pathways. Journey `agenda` references are zero-based indexes into the agenda array.
 - `index.html`: introduction, navigation, next steps, and presentation disclosures.
 - `styles.css`: color tokens, responsive layout, and visual treatment.
-- `app.js`: presentation interactions. Content is rendered using text nodes, not injected HTML.
+- `presentation.js`: linear slide order and deep-link resolution.
+- `app.js`: single-slide rendering and navigation. Content is rendered using text nodes, not injected HTML.
 
-No reference images were present in the repository. The journey illustration is an original CSS visual; brand names and color cues are presentation context, not official logo assets. Replace with approved assets when available.
+The visual treatment follows the reference microsite’s soft blue background, blue introduction, white panels, and restrained accents, with fewer controls and larger presentation type. No external assets are required; brand names are presentation context, not official logo assets.
 
 ## Validation
 
-With Node.js 18+ installed, run `npm run check` for JavaScript syntax and `npm test` for content-structure checks. Manually verify journey selection, all agenda topics, deep links, disclosure controls, architecture selection, both scenario paths, keyboard navigation, and mobile layouts in a browser.
+With Node.js 18+ installed, run `npm run check` for JavaScript syntax and `npm test` for content completeness, slide ordering, and deep-link checks. Manually verify Previous/Next boundaries, browser history, direct links, optional notes, paired pathways, keyboard navigation, and mobile layouts in a browser.
 
 ## Content boundaries
 
