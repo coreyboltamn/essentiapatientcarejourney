@@ -228,6 +228,7 @@ $('demo-handoff-button').addEventListener('click', (event) => {
 });
 $('journey-restart').addEventListener('click', () => {
   stopAutoPlay();
+  stageIndex = 0;
   persona = 'spoken';
   agendaIndex = 0;
   scenarioIndex = 0;
