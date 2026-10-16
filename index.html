@@ -30,6 +30,20 @@
       <div class="hero-art" aria-hidden="true"><span class="hero-orbit"></span><span class="hero-person">◎</span><span class="hero-art-label">EVERY CONVERSATION MATTERS</span></div>
     </section>
 
+    <section class="panel persona-panel" aria-labelledby="persona-title">
+      <div class="panel-heading">
+        <div><p class="eyebrow">PRESENTATION LENS</p><h2 id="persona-title">Whose journey are we following?</h2></div>
+        <p class="panel-intro">Choose a patient persona to carry through each stage. Use the same journey to connect stakeholder questions with AMN services.</p>
+      </div>
+      <div class="persona-grid" id="persona-list" role="group" aria-label="Patient personas">
+        <button class="persona-card" type="button" data-persona="spoken" aria-pressed="true"><span class="persona-symbol" aria-hidden="true">◉</span><strong>Spanish-speaking patient</strong><span>Spoken-language interpretation across access, care, and follow-up.</span></button>
+        <button class="persona-card" type="button" data-persona="asl" aria-pressed="false"><span class="persona-symbol" aria-hidden="true">✧</span><strong>Deaf ASL-using patient</strong><span>Effective visual communication and ASL access throughout the journey.</span></button>
+      </div>
+      <p class="stakeholder-label">A shared discussion for</p>
+      <div class="stakeholder-strip" aria-label="Client stakeholder perspectives"><span>Patient access</span><span>Clinical teams</span><span>Digital &amp; IT</span><span>Interpreter services</span><span>Program leaders</span></div>
+      <p class="persona-context" id="persona-context" aria-live="polite"></p>
+    </section>
+
     <section class="panel journey-panel" aria-labelledby="journey-title">
       <div class="panel-heading">
         <div><p class="eyebrow">01 / THE CARE EXPERIENCE</p><h2 id="journey-title">Patient engagement timeline</h2></div>
@@ -40,7 +54,7 @@
         </div>
       </div>
 
-      <div class="touchpoint-bands" aria-label="Common touchpoints by journey phase">
+      <div class="touchpoint-bands" id="touchpoint-bands" aria-label="Common touchpoints by journey phase">
         <article class="touchpoint-card pre"><h3>Common touchpoints: pre-visit</h3><ul><li data-touchpoint="Website">Website</li><li data-touchpoint="Call Center">Call center</li><li data-touchpoint="Appointment Scheduling">Appointment scheduling</li><li data-touchpoint="Patient Portal">Patient portal</li><li data-touchpoint="Text/Email Reminders">Text/email reminders</li><li data-touchpoint="Pre-Visit Instructions">Pre-visit instructions</li></ul></article>
         <article class="touchpoint-card visit"><h3>Common touchpoints: during visit</h3><ul><li data-touchpoint="Front Desk/Registration">Front desk/registration</li><li data-touchpoint="Kiosk Check-In">Kiosk check-in</li><li data-touchpoint="Nurse Triage">Nurse triage</li><li data-touchpoint="Physician Consult">Physician consult</li><li data-touchpoint="Medication Administration">Medication administration</li><li data-touchpoint="Care Planning">Care planning</li></ul></article>
         <article class="touchpoint-card post"><h3>Common touchpoints: post-visit</h3><ul><li data-touchpoint="Discharge Instructions">Discharge instructions</li><li data-touchpoint="Medication Education">Medication education</li><li data-touchpoint="Follow-Up Calls">Follow-up calls</li><li data-touchpoint="Billing">Billing</li><li data-touchpoint="Patient Surveys">Patient surveys</li><li data-touchpoint="Portal Messaging">Portal messaging</li></ul></article>
@@ -56,10 +70,11 @@
 
       <div class="stage-detail">
         <div class="stage-top"><div class="stage-icon" id="stage-icon" aria-hidden="true"></div><div><p class="phase" id="stage-position"></p><h3 id="stage-title"></h3></div><span class="counter" id="stage-outcome"></span></div>
+        <p class="persona-stage-label" id="persona-stage-label"></p>
         <div class="cards-row">
           <article><h4>Patient experience</h4><p id="patient-need"></p></article>
           <article><h4>Care-team workflow</h4><p id="care-action"></p></article>
-          <article class="asl-card"><h4>ASL / communication access</h4><p id="asl-need"></p><p class="access-note">Patient preference and effective communication guide the modality. Audio-only is not an ASL fallback.</p></article>
+          <article class="asl-card"><h4>ASL / communication access</h4><p id="asl-need"></p><p class="access-note">Patient preference and effective communication guide the modality. Audio-only is not an ASL fallback. Written English or translated documents do not replace ASL interpretation.</p></article>
         </div>
         <div class="solution-bar"><div><span class="eyebrow">AMN CONNECTION</span><strong id="stage-solution"></strong></div><a id="stage-agenda" class="text-link" href="#agenda">Explore related agenda <span aria-hidden="true">↗</span></a></div>
       </div>
@@ -75,6 +90,11 @@
       <div id="architecture-nodes" class="architecture-nodes" aria-label="Explore conceptual architecture"></div>
       <div class="architecture-detail"><span class="eyebrow">EXPLORE THE CONNECTION</span><h3 id="architecture-title"></h3><p id="architecture-description"></p></div>
       <p class="footnote">DISCOVERY VIEW • Cloud/hosted model, interfaces, security, data flows, and availability require joint validation. No live system connections are made.</p>
+    </section>
+
+    <section id="demo-handoff" class="demo-handoff" aria-labelledby="demo-handoff-title">
+      <div><p class="eyebrow">PRESENTER CUE · LIVE TECHNOLOGY DEMO</p><h2 id="demo-handoff-title">Pause the journey. Show the live experience.</h2><p>After mapping patient needs and AMN service connections, switch to the live AMN technology demo here. Return to the microsite afterward for the illustrative scenario and stakeholder discussion.</p></div>
+      <button id="demo-handoff-button" class="button primary" type="button" aria-pressed="false">Mark live-demo handoff</button>
     </section>
 
     <section id="scenario" class="panel scenario-section">

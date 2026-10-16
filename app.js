@@ -5,6 +5,23 @@ let stageIndex = 0;
 let agendaIndex = 0;
 let scenarioIndex = 0;
 let aslScenario = false;
+let persona = 'spoken';
+let journeyTimer = null;
+
+const personaDetails = {
+  spoken: { label: 'Spanish-speaking patient', path: 'spoken-language pathway' },
+  asl: { label: 'Deaf ASL-using patient', path: 'ASL / visual communication pathway' },
+};
+
+const stageTouchpoints = [
+  ['Website', 'Call Center', 'Patient Portal'],
+  ['Appointment Scheduling', 'Patient Portal', 'Text/Email Reminders', 'Pre-Visit Instructions'],
+  ['Front Desk/Registration', 'Kiosk Check-In'],
+  ['Nurse Triage', 'Physician Consult'],
+  ['Medication Administration', 'Care Planning'],
+  ['Discharge Instructions', 'Medication Education'],
+  ['Follow-Up Calls', 'Billing', 'Patient Surveys', 'Portal Messaging'],
+];
 
 function announce(text) {
   $('announcement').textContent = text;
@@ -26,17 +43,62 @@ function showStage(index, notify = true) {
   stageIndex = index;
   const stage = stages[index];
   selectButton($('journey-stages'), index);
+  const selectedPersona = personaDetails[persona];
+  $('track').style.setProperty('--progress', `${3 + index * 94 / (stages.length - 1)}%`);
   $('stage-position').textContent = `STAGE ${index + 1} OF ${stages.length} / ${stage.label.toUpperCase()}`;
   $('stage-title').textContent = stage.title;
+  $('stage-icon').textContent = stage.icon;
   $('stage-outcome').textContent = stage.outcome;
-  $('patient-need').textContent = stage.patient;
+  $('persona-stage-label').textContent = `Following: ${selectedPersona.label} · ${selectedPersona.path}`;
+  $('patient-need').textContent = persona === 'asl' ? stage.asl : stage.patient;
   $('care-action').textContent = stage.action;
-  $('asl-need').textContent = stage.asl;
   $('stage-solution').textContent = stage.solution;
   $('stage-agenda').href = `#agenda-${stage.agenda + 1}`;
   $('stage-prev').disabled = index === 0;
   $('stage-next').disabled = index === stages.length - 1;
-  if (notify) announce(`${stage.title}. Both spoken-language and ASL pathways updated.`);
+  $('touchpoint-bands').querySelectorAll('[data-touchpoint]').forEach((item) => {
+    const active = stageTouchpoints[index].includes(item.dataset.touchpoint);
+    item.classList.toggle('tp-active', active);
+    item.classList.toggle('tp-dim', !active);
+  });
+  $('touchpoint-bands').querySelectorAll('.touchpoint-card').forEach((card) => {
+    card.classList.toggle('phase-active', card.querySelector('.tp-active') !== null);
+    card.classList.toggle('phase-idle', card.querySelector('.tp-active') === null);
+  });
+  if (notify) announce(`${selectedPersona.label}, ${stage.title}. ${stage.solution}`);
+}
+
+function selectPersona(value, notify = true) {
+  persona = value;
+  aslScenario = persona === 'asl';
+  [...$('persona-list').children].forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.persona === persona)));
+  const selectedPersona = personaDetails[persona];
+  $('persona-context').textContent = `Selected experience: ${selectedPersona.label} · ${selectedPersona.path}. The current stage, service connection, and demo scenario will keep this access need in view.`;
+  showStage(stageIndex, false);
+  showScenario(scenarioIndex, false);
+  if (notify) announce(`Following the ${selectedPersona.label} through the patient journey.`);
+}
+
+function stopAutoPlay() {
+  if (journeyTimer !== null) window.clearInterval(journeyTimer);
+  journeyTimer = null;
+  $('journey-play').textContent = '▶ Auto-play';
+  $('journey-play').setAttribute('aria-pressed', 'false');
+}
+
+function startAutoPlay() {
+  if (journeyTimer !== null) return;
+  $('journey-play').textContent = 'Ⅱ Pause';
+  $('journey-play').setAttribute('aria-pressed', 'true');
+  announce('Auto-play started. Journey stages will advance.');
+  journeyTimer = window.setInterval(() => {
+    if (stageIndex >= stages.length - 1) {
+      stopAutoPlay();
+      announce('End of the patient journey.');
+      return;
+    }
+    showStage(stageIndex + 1);
+  }, 3500);
 }
 
 function addList(parent, title, items) {
@@ -129,7 +191,8 @@ function showScenario(index, notify = true) {
 
 stages.forEach((stage, index) => {
   const button = choiceButton('', index, showStage);
-  button.append(textElement('span', stage.icon, 'stage-icon'), textElement('small', `0${index + 1}`), textElement('strong', stage.title));
+  button.append(textElement('small', `0${index + 1}`), textElement('strong', stage.title));
+  button.setAttribute('aria-label', `Stage ${index + 1}: ${stage.title}`);
   $('journey-stages').append(button);
 });
 agenda.forEach((topic, index) => {
@@ -146,11 +209,45 @@ scenario.forEach((step, index) => $('scenario-steps').append(choiceButton(`${ind
 
 $('stage-prev').addEventListener('click', () => showStage(Math.max(0, stageIndex - 1)));
 $('stage-next').addEventListener('click', () => showStage(Math.min(stages.length - 1, stageIndex + 1)));
+$('journey-play').addEventListener('click', () => journeyTimer === null ? startAutoPlay() : stopAutoPlay());
+$('persona-list').addEventListener('click', (event) => {
+  const button = event.target.closest('button[data-persona]');
+  if (button) selectPersona(button.dataset.persona);
+});
+$('presentation-mode').addEventListener('change', (event) => {
+  document.body.classList.toggle('presentation-mode', event.target.checked);
+});
+$('demo-handoff-button').addEventListener('click', (event) => {
+  const button = event.currentTarget;
+  const started = button.getAttribute('aria-pressed') !== 'true';
+  button.setAttribute('aria-pressed', String(started));
+  button.textContent = started ? 'Return from live demo' : 'Mark live-demo handoff';
+  announce(started
+    ? 'Live-demo handoff: switch to the AMN technology demo now. Return to the microsite for the illustrative scenario.'
+    : 'Return to the microsite after the live technology demo.');
+});
+$('journey-restart').addEventListener('click', () => {
+  stopAutoPlay();
+  persona = 'spoken';
+  agendaIndex = 0;
+  scenarioIndex = 0;
+  aslScenario = false;
+  $('presentation-mode').checked = false;
+  document.body.classList.remove('presentation-mode');
+  $('demo-handoff-button').setAttribute('aria-pressed', 'false');
+  $('demo-handoff-button').textContent = 'Mark live-demo handoff';
+  selectPersona(persona, false);
+  showAgenda(0, false);
+  showArchitecture(0, false);
+  showScenario(0, false);
+  if (location.hash) history.replaceState(null, '', `${location.pathname}${location.search}`);
+  $('overview').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  announce('Journey restarted at the first patient persona and stage.');
+});
 $('scenario-prev').addEventListener('click', () => showScenario(Math.max(0, scenarioIndex - 1)));
 $('scenario-next').addEventListener('click', () => showScenario(Math.min(scenario.length - 1, scenarioIndex + 1)));
 ['spoken', 'asl'].forEach((path) => $(`scenario-${path}`).addEventListener('click', () => {
-  aslScenario = path === 'asl';
-  showScenario(scenarioIndex);
+  selectPersona(path, true);
 }));
 
 // Arrow keys navigate within each selector; normal Tab navigation remains available.
@@ -181,18 +278,6 @@ $('present').addEventListener('click', async () => {
 document.addEventListener('fullscreenchange', () => {
   $('present').textContent = document.fullscreenElement ? 'Exit presentation ⛶' : 'Present ⛶';
 });
-const links = [...document.querySelectorAll('.sidebar nav a')];
-const observer = new IntersectionObserver((entries) => {
-  const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-  if (!visible.length) return;
-  links.forEach((link) => {
-    const active = link.hash === `#${visible[0].target.id}`;
-    link.classList.toggle('active', active);
-    if (active) link.setAttribute('aria-current', 'location');
-    else link.removeAttribute('aria-current');
-  });
-}, { rootMargin: '-10% 0px -55% 0px', threshold: 0 });
-document.querySelectorAll('main > section').forEach((section) => observer.observe(section));
 window.addEventListener('hashchange', applyAgendaHash);
 document.addEventListener('click', (event) => {
   const link = event.target.closest('a[href^="#agenda-"]');
@@ -202,6 +287,7 @@ document.addEventListener('click', (event) => {
   applyAgendaHash();
 });
 showStage(0, false);
+selectPersona(persona, false);
 showAgenda(agendaIndex, false);
 showArchitecture(0, false);
 showScenario(0, false);
