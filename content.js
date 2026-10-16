@@ -3,6 +3,7 @@ export const agenda = [
   {
     title: 'Healthcare Language Access Overview', short: 'Language access', phase: 'Every touchpoint',
     summary: 'Connect people to care, in the language and communication mode they need.',
+    talkingPoints: ['Ask about preferred language and communication needs.', 'Match qualified interpretation to the care setting.', 'Confirm language, ASL, specialty, and location coverage.'],
     workflow: ['Identify preferred language, communication needs, and the patient’s preferred access method.', 'Explore on-demand video (VRI), over-the-phone audio, and scheduled in-person interpretation across access, clinical, and remote care settings.', 'Review language coverage, ASL availability, specialty expertise, qualifications, and availability by location with AMN.'],
     solution: 'AMN Healthcare Language Services • interpretation across care settings',
     considerations: ['Use qualified interpreters for clinical communication; do not default to family members.', 'Confirm the supported language roster, specialties, hours, and modality-specific service levels.'],
@@ -12,6 +13,7 @@ export const agenda = [
   {
     title: 'Solution Architecture and Integration Overview', short: 'Architecture & integration', phase: 'Connected foundation',
     summary: 'Bring language access into existing workflows—not another disconnected destination.',
+    talkingPoints: ['Map clinical, portal, telehealth, and contact center entry points.', 'Agree on identity, access, and minimum necessary context.', 'Validate interfaces and encounter documentation together.'],
     workflow: ['Map EHR/workstation, patient portal, telehealth, contact center, and identity entry points to a language-services access layer.', 'Validate the cloud or hosted model, data flows, authentication/SSO, role-based access, and minimum necessary patient context.', 'Assess APIs, SDKs, webhooks, HL7/FHIR capabilities, encounter write-back, and event/error handling against the actual vendor and Essentia environments.'],
     solution: 'Integration discovery • workflow launch • encounter context',
     considerations: ['This is a conceptual architecture, not a confirmed integration design or a claim that every interface is available.', 'Confirm supported versions, licensing, PHI handling, retention, security review, and interface ownership before scope approval.'],
@@ -21,6 +23,7 @@ export const agenda = [
   {
     title: 'Patient Access and Scheduling Experience', short: 'Access & scheduling', phase: 'Before the visit',
     summary: 'Make communication needs visible before a patient walks through the door.',
+    talkingPoints: ['Capture communication preferences at the first request.', 'Coordinate the interpreter before the appointment.', 'Send accessible reminders and joining instructions.'],
     workflow: ['Request assistance at registration, scheduling, digital check-in, or through the patient portal.', 'Capture preferred language, communication needs, modality preference, appointment context, and accessibility requirements.', 'Coordinate a scheduled interpreter, confirm coverage, and send accessible appointment reminders and joining instructions.'],
     solution: 'Scheduled interpretation • patient access workflows • translated communications',
     considerations: ['Confirm where preferences are stored and how updates propagate to the care team.', 'Provide an accessible rescheduling and cancellation path; reconfirm needs for each encounter.'],
@@ -30,6 +33,7 @@ export const agenda = [
   {
     title: 'Point-of-Care Clinical Workflow', short: 'Point of care', phase: 'During the encounter',
     summary: 'Connect the care team, patient, and qualified interpreter at the moment of need.',
+    talkingPoints: ['Launch from an approved clinical workflow.', 'Confirm patient, interpreter, language, and modality.', 'Support consent and document interpreter participation.'],
     workflow: ['Clinician launches from an EHR or workstation workflow; verify patient and encounter using approved identifiers.', 'Choose video, audio, or scheduled in-person support; match language, specialty, and availability.', 'Confirm interpreter identity and role, support informed consent, and document interpreter ID/name, modality, session reference, and relevant encounter details.'],
     solution: 'Video & audio interpretation • in-person coordination • clinical workflow alignment',
     considerations: ['Validate launch and encounter write-back capabilities; use an approved manual documentation process where needed.', 'Consent remains the clinician’s responsibility; follow organizational policy and record only necessary session metadata.'],
@@ -39,6 +43,7 @@ export const agenda = [
   {
     title: 'Interpreter Experience', short: 'Interpreter experience', phase: 'Behind every connection',
     summary: 'Support a reliable assignment lifecycle and a consistent experience for the care team.',
+    talkingPoints: ['Verify identity and match qualified interpreter expertise.', 'Confirm roles and context before the session.', 'Make escalation, handoffs, and quality review clear.'],
     workflow: ['Review interpreter login, identity verification, availability, and assignment acceptance workflows.', 'Match language and specialty requirements; confirm patient context and interpreter role before the session.', 'Review session controls, escalation and handoff, policy-governed interpreter notes, and quality/performance review tools.'],
     solution: 'Interpreter operations • assignment coordination • quality management',
     considerations: ['Demonstrate actual interpreter tooling and confirm which controls and reports are available.', 'Avoid unnecessary clinical notes or recordings; define access, retention, and escalation ownership.'],
@@ -48,6 +53,7 @@ export const agenda = [
   {
     title: 'Telehealth and Remote Care Workflow', short: 'Telehealth & remote care', phase: 'Care beyond the facility',
     summary: 'Keep the interpreter part of the visit, wherever the patient joins.',
+    talkingPoints: ['Invite the interpreter through a validated joining process.', 'Check identity, consent, and three-party connectivity.', 'Agree on reconnection and safe fallback before the visit.'],
     workflow: ['Schedule or add an interpreter to a virtual visit using the validated telehealth joining process.', 'Confirm three-way video/audio, patient identity, consent, and a mobile-friendly patient connection.', 'Test interpreter handoff, reconnection, and connection-failure handling; for spoken-language visits, use an approved audio fallback when appropriate.'],
     solution: 'Remote interpretation • three-party visits • continuity workflows',
     considerations: ['Confirm platform compatibility, invitations, device support, and the visit host’s session controls.', 'Agree on a safe pause/escalation process before clinical communication continues after a failure.'],
@@ -57,6 +63,7 @@ export const agenda = [
   {
     title: 'Contact Center and Non-Clinical Workflow', short: 'Contact center', phase: 'Access & ongoing care',
     summary: 'Extend communication access to the conversations surrounding clinical care.',
+    talkingPoints: ['Identify language and access needs at first contact.', 'Use a supported three-way call or warm transfer.', 'Preserve context through billing, referrals, and coordination.'],
     workflow: ['Patient access or call center representative identifies the language/communication need and initiates interpretation.', 'Use a supported three-way call or warm transfer, introduce participants, and preserve context across the handoff.', 'Support registration, billing, referrals, and care coordination; document service use and the next action in the approved system.'],
     solution: 'Audio interpretation • patient access support • coordinated handoffs',
     considerations: ['Validate telephony integration and transfer behavior; prevent disconnected or duplicated requests.', 'Verify identity before discussing sensitive information and document only necessary call details.'],
@@ -66,6 +73,7 @@ export const agenda = [
   {
     title: 'Written Translation Capabilities', short: 'Written translation', phase: 'Across the journey',
     summary: 'Make essential information understandable beyond the interpreted conversation.',
+    talkingPoints: ['Define audience, language, format, and accessibility needs.', 'Use approved translation, terminology, and human review.', 'Validate layout, turnaround, approval, and version control.'],
     workflow: ['Submit approved source files with target languages, audience, format, accessibility needs, and requested due date.', 'Review translation memory and terminology management, human translation, linguistic review, and stakeholder approval; assess machine translation only within approved risk and privacy policies.', 'Plan forms, discharge instructions, consent documents, and digital content; confirm supported document formats, layout/accessibility checks, turnaround times, and version control.'],
     solution: 'Document translation • terminology consistency • review & approval',
     considerations: ['Do not imply a guaranteed turnaround: scope, language, complexity, and review affect delivery.', 'High-risk clinical content needs appropriate human review; verify secure submission and approved use of machine translation.'],
@@ -75,15 +83,17 @@ export const agenda = [
   {
     title: 'End-to-End Scenario: Emergency or Urgent Care Visit', short: 'Urgent care scenario', phase: 'A connected care journey',
     summary: 'Follow one fictional encounter from arrival to a clear next step.',
+    talkingPoints: ['Connect interpretation without delaying urgent assessment.', 'Maintain access through consent, tests, and handoffs.', 'Use teach-back, accessible follow-up, and clear documentation.'],
     workflow: ['Arrival → registration → triage: identify communication needs, verify identity, and connect appropriate interpretation without delaying urgent clinical assessment.', 'Clinical encounter → consent → diagnostics: maintain interpreter access, explain choices and procedures, and document language-service use.', 'Discharge → follow-up scheduling → documentation: use interpreted teach-back, appropriate written materials, accessible follow-up instructions, and encounter metadata.'],
     solution: 'On-demand access • clinical continuity • discharge & follow-up support',
-    considerations: ['Use the interactive scenario below to compare spoken-language and ASL access decisions.', 'This is a fictional workflow, not clinical advice or a live patient system.'],
+    considerations: ['Use the following guided scenario to compare spoken-language and ASL access decisions side by side.', 'This is a fictional workflow, not clinical advice or a live patient system.'],
     asl: 'Reassess effective communication at every handoff. Maintain visual access during triage, diagnostics, bedside discussions, and discharge; arrange in-person support when needed.',
     question: 'At which handoff is the patient most likely to lose communication access?',
   },
   {
     title: 'Reporting, Analytics, and Administration', short: 'Reporting & administration', phase: 'Program visibility',
     summary: 'Turn service activity into a practical improvement conversation.',
+    talkingPoints: ['Review use by location, language, and modality.', 'Agree on wait-time, quality, cost, and access measures.', 'Validate permissions, exports, and operational review cadence.'],
     workflow: ['Review usage by location, department, language, modality, and interpreter with role-appropriate access.', 'Assess wait times, abandoned requests, session duration, service levels, costs, and quality metrics using agreed definitions.', 'Validate available dashboards, audit logs, administration controls, and data export formats/cadence; agree on a regular operational review.'],
     solution: 'Program reporting • operational insights • quality improvement',
     considerations: ['No live data or performance claims are shown. Confirm actual fields, refresh cadence, retention, and permissions.', 'Use aggregated or de-identified reporting where possible and restrict interpreter/patient-level detail.'],
@@ -93,6 +103,7 @@ export const agenda = [
   {
     title: 'Implementation and Support Model', short: 'Implementation & support', phase: 'From alignment to adoption',
     summary: 'Launch in manageable waves, with clear owners and support pathways.',
+    talkingPoints: ['Discover workflows, systems, security needs, and scope.', 'Test accessibility, train teams, and pilot one service line.', 'Agree on support, escalation, acceptance, and ongoing review.'],
     workflow: ['Discover and design: inventory systems, facilities, workflows, security requirements, and any data migration needs; agree on integration scope and a jointly validated timeline.', 'Configure and validate: test integrations and accessibility, train clinical and access teams, prepare change management, and pilot by facility or service line.', 'Roll out and optimize: define help desk ownership, escalation routes, service-level agreements, incident communication, and ongoing adoption/quality reviews.'],
     solution: 'Implementation planning • training • support & optimization',
     considerations: ['Timeline, migration scope, support hours, and SLAs are to be agreed—not commitments in this presentation.', 'Set measurable acceptance criteria, downtime workflows, a pilot feedback loop, and go/no-go owners.'],

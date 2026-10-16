@@ -10,6 +10,8 @@ test('all eleven agenda topics contain workflows and explicit ASL guidance', () 
       assert.ok(topic[key]?.trim(), `${topic.title}: missing ${key}`);
     }
     assert.ok(topic.workflow.length >= 3);
+    assert.equal(topic.talkingPoints.length, 3);
+    assert.ok(topic.talkingPoints.every((point) => point.trim() && point.length <= 100));
     assert.ok(topic.considerations.length >= 2);
   }
 });
