@@ -1,0 +1,19 @@
+{
+  "name": "essentiapatientcarejourney",
+  "version": "1.0.0",
+  "description": "Interactive patient journey microsite for Essentia Health client presentation covering AMN Healthcare Language Services.",
+  "private": true,
+  "scripts": {
+    "start": "python3 -m http.server 4173 --bind 0.0.0.0",
+    "check": "node --check app.js && node --check content.js",
+    "test": "node --test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/coreyboltamn/essentiapatientcarejourney"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module"
+}
