@@ -194,6 +194,13 @@ const observer = new IntersectionObserver((entries) => {
 }, { rootMargin: '-10% 0px -55% 0px', threshold: 0 });
 document.querySelectorAll('main > section').forEach((section) => observer.observe(section));
 window.addEventListener('hashchange', applyAgendaHash);
+document.addEventListener('click', (event) => {
+  const link = event.target.closest('a[href^="#agenda-"]');
+  if (!link || link.hash !== location.hash || event.defaultPrevented ||
+      event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  event.preventDefault();
+  applyAgendaHash();
+});
 showStage(0, false);
 showAgenda(agendaIndex, false);
 showArchitecture(0, false);
