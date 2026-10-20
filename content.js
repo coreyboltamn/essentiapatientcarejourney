@@ -51,10 +51,10 @@ export const agenda = [
     question: 'How should clinical teams and interpreters escalate a communication barrier?',
   },
   {
-    title: 'Telehealth and Remote Care Workflow', short: 'Telehealth & remote care', phase: 'Care beyond the facility',
+    title: 'Telehealth integration', short: 'Telehealth & remote care', phase: 'Care beyond the facility',
     summary: 'Keep the interpreter part of the visit, wherever the patient joins.',
     talkingPoints: ['Invite the interpreter through a validated joining process.', 'Check identity, consent, and three-party connectivity.', 'Agree on reconnection and safe fallback before the visit.'],
-    workflow: ['Schedule or add an interpreter to a virtual visit using the validated telehealth joining process.', 'Confirm three-way video/audio, patient identity, consent, and a mobile-friendly patient connection.', 'Test interpreter handoff, reconnection, and connection-failure handling; for spoken-language visits, use an approved audio fallback when appropriate.'],
+    workflow: ['Schedule or add an interpreter to a virtual visit using the configured telehealth workflow.', 'Confirm three-way video/audio, patient identity, consent, and a mobile-friendly patient connection.', 'Test interpreter handoff, reconnection, and connection-failure handling; for spoken-language visits, use an approved audio fallback when appropriate.'],
     solution: 'Remote interpretation • three-party visits • continuity workflows',
     considerations: ['Confirm platform compatibility, invitations, device support, and the visit host’s session controls.', 'Agree on a safe pause/escalation process before clinical communication continues after a failure.'],
     asl: 'Maintain a visible, adequately sized interpreter video. Audio-only is not an ASL fallback: reconnect visual access, arrange in-person support, or use another patient-agreed effective accommodation.',

@@ -2,6 +2,13 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { agenda, stages, architecture, scenario } from './content.js';
 
+test('presenter telehealth content uses generic integration and workflow wording', () => {
+  const telehealth = agenda.find((topic) => topic.short === 'Telehealth & remote care');
+  assert.equal(telehealth.title, 'Telehealth integration');
+  assert.ok(telehealth.workflow.some((step) => step.includes('configured telehealth workflow')));
+  assert.doesNotMatch(JSON.stringify({ agenda, stages, architecture, scenario }), /teladoc/i);
+});
+
 test('all eleven agenda topics contain workflows and explicit ASL guidance', () => {
   assert.equal(agenda.length, 11);
   assert.equal(new Set(agenda.map((topic) => topic.title)).size, 11);
